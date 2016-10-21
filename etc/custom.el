@@ -1,0 +1,20 @@
+(custom-set-variables)
+(custom-set-faces
+ '(default ((t (:foreground "white" :background "#005" :family "LucidaTypewriter"))) t)
+ '(font-lock-comment-face ((((class color) (background light)) (:foreground "#8F8"))))
+ '(font-lock-function-name-face ((((class color) (background light)) (:foreground "yellow"))))
+ '(font-lock-keyword-face ((((class color) (background light)) (:foreground "#F44"))))
+ '(font-lock-string-face ((((class color) (background light)) (:foreground "white" :background "#034"))))
+ '(font-lock-type-face ((((class color) (background light)) (:foreground "cyan"))))
+ '(font-lock-variable-name-face ((((class color) (background light)) (:foreground "#F6F"))))
+ '(keyword ((t (:foreground "#F44"))) t))
+
+(setq c-indent-level 4)
+(setq c-basic-offset 4)
+(defun amc-c-mode-customization ()
+  (setq indent-tabs-mode nil)
+)
+(add-hook 'c-mode-hook 'amc-c-mode-customization)
+
+(load "~/.xemacs/amc-lisp.el")
+(setq amc-init-check t)

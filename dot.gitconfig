@@ -1,0 +1,18 @@
+[user]
+	email = solidwallofcode@yahoo-inc.com
+	name = Alan M. Carroll
+[push]
+	default = simple
+[alias]
+	pr  = "!f() { git fetch -fu ${2:-ats} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+	pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+	ypr  = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+	localize = "!f() { git remote set-url pr git@github.com:$1/trafficserver.git;git checkout -b TMP; git fetch pr $2:$2;git checkout $2;git branch -D TMP; }; f"
+
+#`  cmd = "cd {0}".format(name)
+ #` cmd += " && git remote set-url origin {0}".format(repo)
+  #`if revision:
+   #` cmd += " && git fetch origin {0} && git checkout {0}".format(revision)
+#`  elif branch:
+ #`   cmd += " && git checkout -b TMP_BRANCH && git fetch origin {0}:{0} && git checkout {0} && git branch -D TMP_BRANCH".format(branch)
+
