@@ -2,7 +2,7 @@
 	email = solidwallofcode@yahoo-inc.com
 	name = Alan M. Carroll
 [push]
-	default = simple
+	default = current
 [alias]
 	pr  = "!f() { git fetch -fu ${2:-ats} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
 	pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
