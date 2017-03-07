@@ -1,6 +1,6 @@
 #!/bin/sh
 dir=${1:-ats}
-git clone git@github.com:apache/trafficserver.git
+git clone git@github.com:apache/trafficserver.git ${dir}
 if [ -d ${dir} ] ; then
     cd ${dir}
     git remote rename origin ats
