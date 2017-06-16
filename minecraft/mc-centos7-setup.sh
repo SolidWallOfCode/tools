@@ -1,4 +1,3 @@
-git config --global --unset core.autocrlf
 sudo yum install epel-release
 sudo yum install java-1.8.0-openjdk-devel
 sudo yum install python-devel python-pip gcc openssl-devel
