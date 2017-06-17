@@ -14,3 +14,5 @@ sudo cp ~amc/.ssh/*.pub.key ~minecraft/.ssh
 sudo cp ~amc/.ssh/authorized_keys ~minecraft/.ssh
 sudo chmod 640 ~minecraft/.ssh/*
 sudo chgrp minecraft ~minecraft/.ssh/*
+
+sudo usermod amc --groups wheel,minecraft
