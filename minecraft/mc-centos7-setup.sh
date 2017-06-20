@@ -12,7 +12,7 @@ sudo chmod 750 ~minecraft/.ssh
 sudo chgrp minecraft ~minecraft/.ssh
 sudo cp ~amc/.ssh/*.pub.key ~minecraft/.ssh
 sudo cp ~amc/.ssh/authorized_keys ~minecraft/.ssh
-sudo chmod 640 ~minecraft/.ssh/*
-sudo chgrp minecraft ~minecraft/.ssh/*
+sudo bash -c 'chmod 640 ~minecraft/.ssh/*'
+sudo bash -c 'chgrp minecraft ~minecraft/.ssh/*'
 
-sudo usermod amc --groups wheel,minecraft
+sudo usermod --groups minecraft --append amc
