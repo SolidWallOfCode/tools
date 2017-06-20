@@ -15,8 +15,8 @@ if [ ! -f ~/bin/mark2 ] ; then
     ln -s ~/git/mark2/mark2 ~/bin/mark2
 fi
 
-if ! grep -q MARK2_CONFIG_DIR .bash_profile ; then
-    echo 'export MARK2_CONFIG_DIR=/home/minecraft/server' >> .bash_profile
+if ! grep -q MARK2_CONFIG_DIR ~/.bashrc ; then
+    echo 'export MARK2_CONFIG_DIR=/home/minecraft/server' >> ~/.bashrc
 fi
 
 if [ ! -d server ] ; then
