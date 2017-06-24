@@ -6,7 +6,7 @@ sudo firewall-cmd --permanent --service=minecraft --add-port=25565/tcp
 sudo firewall-cmd --permanent --zone=public --add-service=minecraft
 sudo firewall-cmd --reload
 
-useradd --shell /bin/bash minecraft
+useradd --shell /bin/bash --create-home minecraft
 sudo mkdir ~minecraft/.ssh
 sudo chmod 750 ~minecraft/.ssh
 sudo chgrp minecraft ~minecraft/.ssh
