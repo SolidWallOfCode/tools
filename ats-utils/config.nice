@@ -1,0 +1,12 @@
+#! /bin/sh
+#
+# Created by configure
+
+"./configure" \
+"--enable-debug" \
+"--prefix=/opt/ats" \
+"--enable-werror" \
+"--enable-experimental-plugins" \
+"--enable-example-plugins" \
+"--with-user=ats" \
+"$@"
