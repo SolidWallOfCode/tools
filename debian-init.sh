@@ -1,6 +1,6 @@
 echo Use the root password during initial setup.
 su --command 'apt-get install sudo'
-su --command 'add user amc sudo'
+su --command 'usermod -aG sudo amc'
 su --command ' apt-get install git'
 
 mkdir .ssh
