@@ -3,4 +3,6 @@ sudo dnf install gcc gcc-c++ autoconf automake libtool gdb bison flex openssl op
 sudo pip install --upgrade pip
 sudo pip install sphinx
 
+sudo useradd ats --no-create-home --shell /sbin/nologin
+
 # redhat-rpm-config is for installing Python pacakges via PIP that need to be compiled.
