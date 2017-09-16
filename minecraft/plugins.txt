@@ -1,0 +1,9 @@
+Vault: https://www.spigotmc.org/resources/vault.41918/
+EssentialsX: https://www.spigotmc.org/resources/essentialsx.9089/
+WorldEdit: http://wiki.sk89q.com/wiki/WorldEdit
+WorldGuard: http://wiki.sk89q.com/wiki/WorldGuard
+# Fails in 1.12 Spigot - GroupManager: http://wiki.ess3.net/wiki/Group_Manager
+EssentialsXGroupManager : https://www.spigotmc.org/resources/groupmanager-working-1-7-1-12-builds.38875/
+Blocklocker: https://www.spigotmc.org/resources/blocklocker.3268/
+MythicMobs: https://dev.bukkit.org/projects/mythicmobs
+Holographic Displays: https://dev.bukkit.org/projects/holographic-displays
