@@ -1,2 +1,2 @@
-# This may be required - doesn't break things unclear if it helps
-usermod -aG libvirt amc
+# Doesn't seem to be needed.
+#usermod -aG libvirt amc
