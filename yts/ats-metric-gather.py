@@ -39,7 +39,7 @@ while True:
         if len(key) > 0 :
             current[key] = value
 
-    if (len(current) > 0) :
+    if len(current) > 0 :
         keys = current.keys()
         keys.sort()
         if (keys != COLUMNS) :
