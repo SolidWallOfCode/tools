@@ -1,7 +1,9 @@
 #!/bin/bash
 # For FreeBSD 11
-# Manually install git
-#  pkg install git
+# No sudo by default, use 'su' to get root access.
+# Manually install git and sudo.
+#  pkg install git sudo
+#  sed -ie 's!^# %wheel ALL=(ALL) NOPASSWD: ALL!%wheel ALL=(ALL) NOPASSWD: ALL!' /usr/local/etc/sudoers
 # then clone
 #  git clone https://github.com/solidwallofcode/tools.git git/tools
 # This is the base script to be run before other setup scripts. This is the minimum
