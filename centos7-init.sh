@@ -3,6 +3,10 @@ sudo yum install git
 
 cd ~
 
+if [ ! -d git ] ; then
+  mkdir git
+fi
+
 if [ ! -d git/tools ] ; then
   sudo yum install git
   cd git
