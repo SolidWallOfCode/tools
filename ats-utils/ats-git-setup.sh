@@ -6,4 +6,7 @@ if [ -d ${dir} ] ; then
     git remote rename origin ats
     git remote add swoc git@github.com:SolidWallOfCode/trafficserver.git
     git remote add asf https://gitbox.apache.org/repos/asf/trafficserver.git
+    if [ -d ../tools/ats-utils ] ; then
+        cp ../tools/ats-utils/config.nice .
+    fi
 fi
