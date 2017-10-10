@@ -1,0 +1,14 @@
+#! /bin/sh
+#
+# Created by configure
+# To do clang static analysis with this
+# scan-build --use-c++=clang++ --use-cc=clang make
+
+CC="clang"; export CC
+CXX="clang++"; export CXX
+"./configure" \
+"--enable-experimental-plugins" \
+"CC=clang" \
+"CXX=clang++" \
+"AM_CXXFLAGS=-Werror" \
+"$@"
