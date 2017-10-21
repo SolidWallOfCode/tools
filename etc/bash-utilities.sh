@@ -10,7 +10,7 @@ fi
 
 # User specific aliases and functions
 function findcc {
-find . -name '*.cc' -exec grep "$1" {} \; -print
+find . \( -name '*.cc' -o -name '*.cpp' -o -name '*.c' \) -exec grep "$1" {} \; -print
 }
 
 function findh {
