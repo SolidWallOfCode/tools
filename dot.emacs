@@ -52,11 +52,13 @@
 (defun amc-c-mode-customization ()
   ;; Clean up trailing whitespace on save.
   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+  (set-file-column 100)
 )
 
 (defun amc-c++-mode-customization ()
   ;; Clean up trailing whitespace on save.
   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+  (set-file-column 100)
 )
 
 (add-hook 'c-mode-hook 'amc-c-mode-customization)
