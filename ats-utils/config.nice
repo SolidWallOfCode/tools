@@ -3,10 +3,9 @@
 # Created by configure
 
 "./configure" \
+"--prefix=/home/amc/opt/ats" \
 "--enable-debug" \
-"--prefix=/opt/ats" \
 "--enable-werror" \
 "--enable-experimental-plugins" \
 "--enable-example-plugins" \
-"--with-user=ats" \
 "$@"
