@@ -7,6 +7,11 @@
 # what how the host is to be used.
 
 cd ~
+
+if [ ! -d git ] ; then
+  mkdir git
+fi
+
 # This is only useful if the entire script is cut and pasted instead of fetched via git.
 if [ ! -d git/tools ] ; then
   sudo dnf install git

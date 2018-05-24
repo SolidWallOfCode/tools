@@ -1,8 +1,5 @@
 (load "~/etc/amc-lisp.el")
 (load "~/etc/amc-keys.el")
-;(load "~/etc/git-ediff-hook.el")
-(load "~/etc/clang-format/clang-format.el")
-(setq fill-column 120)
 (global-auto-revert-mode t)
 (setq auto-revert-interval 30)
 (desktop-save-mode 0)
