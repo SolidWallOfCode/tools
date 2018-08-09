@@ -15,15 +15,15 @@ with open(args.source) as stream:
     a_addr = {}
     a_fqdn = {}
     data = json.load(stream)
-    data['connectionCountList'].sort(key=lambda count: count['count'])
-    for group in data['connectionCountList'] :
+    data['list'].sort(key=lambda count: count['current'])
+    for group in data['list'] :
         addr[group['ip']] = 1
         fqdn[group['fqdn']] = 1
-        total += group['count']
-        if group['count'] > 0 :
+        total += group['current']
+        if group['current'] > 0 :
             active += 1
             a_addr[group['ip']] = 1
             a_fqdn[group['fqdn']] = 1
-            print("count {:<4} addr {:<20} block {:2} alert {}".format(group['count'], group['ip'], group['block'], group['alert']))
+            print("count {:<4} addr {:<20} block {:2} alert {}".format(group['current'], group['ip'], group['blocked'], group['alert']))
 
     print("{} groups active with {} connections, {}/{} addresses, {}/{} fqdns".format(active, total, len(a_addr), len(addr), len(a_fqdn), len(fqdn)))
