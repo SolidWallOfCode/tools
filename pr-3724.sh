@@ -155,7 +155,7 @@ clean-local:
 
 clang-tidy-local: $(DIST_SOURCES)
 	$(CXX_Clang_Tidy)
-	
+
 HERE
 
 cat > include/tscpp/util/Makefile.am << 'HERE'
@@ -457,3 +457,5 @@ sed -i -E -e 's!(src/tscore/libtscore.la)!\1 \\\
 sed -i -E -e 's!iport = atoi[(]port[)];!iport = ts::svtoi(port);!' tools/jtest/jtest.cc
 sed -i -E -e '63a\
 #include "tscpp/util/TextView.h"' tools/jtest/jtest.cc
+
+git add include/Makefile.am include/tscpp/api/Makefile.am include/tscpp/util/Makefile.am src/tscpp/util/Makefile.am src/tscpp/util/unit_tests/unit_test_main.cc
