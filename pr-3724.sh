@@ -293,7 +293,7 @@ find . \( -name '*.cc' -o -name '*.h' \) -exec sed -i -E -e 's!<atscppapi/([_[:a
 
 find src \( -name '*.cc' -o -name '*.h' \) -exec sed -i -E -e 's!include .ts/([+_[:alnum:]]+)[.]h.!include "tscore/\1.h"!' {} \;
 find tools \( -name '*.cc' -o -name '*.h' -o -name '*.c' \) -exec sed -i -E -e 's!include .ts/([+_[:alnum:]]+)[.]h.!include "tscore/\1.h"!' {} \;
-find lib \( -name '*.cc' -o -name '*.h' -o -name '*.y' \) -exec sed -i -E -e 's!include .ts/([+_[:alnum:]]+)[.]h.!include "tscore/\1.h"!' {} \;
+find lib \( -name '*.cc' -o -name '*.h' -o -name '*.c' -o -name '*.y' \) -exec sed -i -E -e 's!include .ts/([+_[:alnum:]]+)[.]h.!include "tscore/\1.h"!' {} \;
 find include/tscore \( -name '*.cc' -o -name '*.h' \) -exec sed -i -E -e 's!include .ts/([+_[:alnum:]]+)[.]h.!include "tscore/\1.h"!' {} \;
 find include/wccp \( -name '*.cc' -o -name '*.h' \) -exec sed -i -E -e 's!include .ts/([+_[:alnum:]]+)[.]h.!include "tscore/\1.h"!' {} \;
 find iocore \( -name '*.cc' -o -name '*.h' \) -exec sed -i -E -e 's!include .ts/([+_[:alnum:]]+)[.]h.!include "tscore/\1.h"!' {} \;
@@ -458,4 +458,6 @@ sed -i -E -e 's!iport = atoi[(]port[)];!iport = ts::svtoi(port);!' tools/jtest/j
 sed -i -E -e '63a\
 #include "tscpp/util/TextView.h"' tools/jtest/jtest.cc
 
-git add include/Makefile.am include/tscpp/api/Makefile.am include/tscpp/util/Makefile.am src/tscpp/util/Makefile.am src/tscpp/util/unit_tests/unit_test_main.cc
+git add include/Makefile.am include/tscpp/api/Makefile.am
+git add include/tscpp/util/Makefile.am src/tscpp/util/Makefile.am src/tscpp/util/unit_tests/unit_test_main.cc
+git add lib/tsconfig/TsConfigGrammar.h lib/tsconfig/TsConfigGrammar.c
