@@ -458,7 +458,17 @@ sed -i -E -e 's!(src/tscore/libtscore.la)!\1 \\\
 # Need this to pass the dependency checks in tools
 sed -i -E -e 's!iport = atoi[(]port[)];!iport = ts::svtoi(port);!' tools/jtest/jtest.cc
 sed -i -E -e '63a\
-#include "tscpp/util/TextView.h"' tools/jtest/jtest.cc
+
+## fix up .gitignore
+sed -i -E -e 's!^lib/ts/!src/tscore/!' .gitignore
+sed -i -E -e 's!^src/tscore/test_tslib!src/tscore/test_libtscore!' .gitignore
+sed -i -E -e 's!^src/tscore/test_tsutil!src/tscore/test_tscore!' .gitignore
+sed -i -E -e 's!^src/tscore/apidefs.h!include/ts/apidefs.h!' .gitignore
+sed -i -E -e 's!^src/tscore/ink_config.h!include/tscore/ink_config.h!' .gitignore
+sed -i -E -e '\!^src/tscore/test_MemView!d' .gitignore
+sed -i -E -e '\!^src/tscore/test_Scalar!d' .gitignore
+sed -i -E -e '\!src/tscore/test_tscore!a\
+src/tscpp/util/test_tscpputil' .gitignore
 
 git add include/Makefile.am include/tscpp/api/Makefile.am
 git add include/tscpp/util/Makefile.am src/tscpp/util/Makefile.am src/tscpp/util/unit_tests/unit_test_main.cc
