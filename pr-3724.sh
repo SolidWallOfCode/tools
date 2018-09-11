@@ -47,12 +47,14 @@ if [ -f src/wccp/Wccp.h ] ; then git mv src/wccp/Wccp.h include/wccp ; fi
 sed -i -e 's!libtsutil!libtscore!' CMakeLists.txt
 sed -i -e 's!lib/ts/!src/tscore/!' CMakeLists.txt
 sed -i -e 's!lib/wccp/!src/wccp/!' CMakeLists.txt
+sed -i -e 's!proxy/api/ts!include/ts!' CMakeLists.txt
 sed -i -e 's!src/wccp/Wccp.h!include/wccp/Wccp.h!' CMakeLists.txt
 sed -i -e 's!unit-tests!unit_tests!' CMakeLists.txt
 sed -i -E -e 's!src/tscore/([^.]+[.]h)!include/tscore/\1!' CMakeLists.txt
 sed -i -E -e 's!test_tslib!test_tscore!' CMakeLists.txt
 sed -i -E -e '\!lib/cppapi/!d' CMakeLists.txt
 sed -i -e '/TextView.cc/d' CMakeLists.txt
+sed -i -e '\!experimental/ssl_cert_loader!d' CMakeLists.txt
 
 # Adjust makefiles
 find . \( -name 'Makefile.am' -o -name 'Makefile.inc' \) -exec sed -i -E -e 's/unit-tests/unit_tests/g' {} \;
@@ -560,3 +562,6 @@ Appendix
 .. [#]
    Primarily by use in the plugins in the |TS| code base.
 HERE
+
+git add doc/developer-guide/introduction/index.en.rst
+git add doc/developer-guide/introduction/header-file-structure.en.rst
