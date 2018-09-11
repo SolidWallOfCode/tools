@@ -159,6 +159,10 @@ clang-tidy-local: $(DIST_SOURCES)
 	$(CXX_Clang_Tidy)
 
 HERE
+# Older versions may not have PostScript.
+if [! -f include/tscpp/util/PostScript.h ] ; then
+  set -i -E -e '/PostScript/d' Makefile.am
+fi
 
 cat > include/tscpp/util/Makefile.am << 'HERE'
 # include/tscpp/util Makefile.am
@@ -352,7 +356,7 @@ sed -i -E -e 's!"[.][.]/[.][.]/proxy/IPAllow.h"!"IPAllow.h"!' proxy/http/remap/R
 sed -i -E -e 's!"PriorityQueue.h"!"tscore/PriorityQueue.h"!' src/tscore/test_PriorityQueue.cc
 sed -i -E -e 's!"BufferWriter.h"!"tscore/BufferWriter.h"!' src/tscore/unit_tests/test_History.cc
 sed -i -E -e 's![.][.]/ts/libtsutil.la!$(top_builddir)/src/tscore/libtscore.la'
-sed -i -E -e 's!([.][.]/)*ts/libtsutil.la!$(top_builddir)/src/tscore/libtscore.la $(top_builddir)/src/tscpp/util/libtsutil.la!' lib/tsconfig/Makefile.am
+sed -i -E -e 's!([.][.]/)*ts/libtsutil.la!$(top_builddir)/src/tscore/libtscore.la $(top_builddir)/src/tscpp/util/libtscpputil.la!' lib/tsconfig/Makefile.am
 
 # Linking fixups
 sed -i -E -e '\!traffic_api_cli_remote_LDADD!,\![$][(]top_builddir[])]/src/tscore/libtscore.la \\!a\
@@ -460,6 +464,7 @@ sed -i -E -e 's!(src/tscore/libtscore.la)!\1 \\\
 # Need this to pass the dependency checks in tools
 sed -i -E -e 's!iport = atoi[(]port[)];!iport = ts::svtoi(port);!' tools/jtest/jtest.cc
 sed -i -E -e '63a\
+#include "tscpp/util/TextView.h"' tools/jtest/jtest.cc
 
 ## fix up .gitignore
 sed -i -E -e 's!^lib/ts/!src/tscore/!' .gitignore
