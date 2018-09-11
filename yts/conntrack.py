@@ -24,6 +24,6 @@ with open(args.source) as stream:
             active += 1
             a_addr[group['ip']] = 1
             a_fqdn[group['fqdn']] = 1
-            print("count {:<4} addr {:<20} block {:2} alert {}".format(group['current'], group['ip'], group['blocked'], group['alert']))
+            print("count {:<4}/{:<4} addr {:<20} block {:2} alert {}".format(group['current'], group['max'], group['ip'], group['blocked'], group['alert']))
 
     print("{} groups active with {} connections, {}/{} addresses, {}/{} fqdns".format(active, total, len(a_addr), len(addr), len(a_fqdn), len(fqdn)))
