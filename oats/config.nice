@@ -1,0 +1,11 @@
+#! /bin/sh
+#
+# Created by configure
+
+"./configure" \
+"--prefix=/home/solidwallofcode/opt/ats" \
+"--enable-debug" \
+"--enable-werror" \
+"--enable-experimental-plugins" \
+"PKG_CONFIG_PATH=/opt/rh/rh-python36/root/usr/lib64/pkgconfig" \
+"$@"
