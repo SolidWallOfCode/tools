@@ -1,17 +1,18 @@
 ##
 # Configure a VZM OpenHouse VM to build Traffic Server.
 
-sudo yum upgrade
-sudo yum install autoconf automake libtool gdb bison flex openssl openssl-devel tcl-devel expat-devel pcre-devel patch wireshark-gnome libcap-devel perl-ExtUtils-MakeMaker libunwind
+sudo yum upgrade -y
+sudo yum install -y autoconf automake libtool gdb bison flex openssl openssl-devel tcl-devel expat-devel pcre-devel patch wireshark-gnome libcap-devel perl-ExtUtils-MakeMaker libunwind
 # Install EPEL
-#sudo yum install y-epel-release --enablerepo=y-extras y-rhscl-repo
+#sudo yum install -y y-epel-release --enablerepo=y-extras y-rhscl-repo
 
-sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-sudo yum install https://rhel7.iuscommunity.org/ius-release.rpm
+sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install -y https://rhel7.iuscommunity.org/ius-release.rpm
 
-sudo yum install devtoolset-7-gcc-c++
-sudo yum install rh-python36
-sudo yum install git2u-all
+sudo yum install -y devtoolset-7-gcc-c++
+sudo yum install -y rh-python36
+sudo yum remove -y git
+sudo yum install -y git2u-all
 
 python3 -m pip install --user --upgrade pip
 python3 -m pip install --user sphinx sphinx-rtd-theme sphinxcontrib-plantuml
