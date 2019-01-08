@@ -3,7 +3,7 @@
 # Created by configure
 
 "./configure" \
-"--prefix=/home/solidwallofcode/opt/ats" \
+"--prefix=/home/solidwallofcode/opt/oats" \
 "--enable-debug" \
 "--enable-werror" \
 "--enable-experimental-plugins" \
