@@ -9,7 +9,7 @@ sudo yum install -y autoconf automake libtool gdb bison flex openssl openssl-dev
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 sudo yum install -y https://rhel7.iuscommunity.org/ius-release.rpm
 
-sudo yum install -y devtoolset-7-gcc-c++
+sudo yum install -y devtoolset-8-gcc-c++
 sudo yum install -y rh-python36
 sudo yum remove -y git
 sudo yum install -y git2u-all
@@ -26,8 +26,8 @@ if [ ! -d oats ] ; then
   git clone git@partner.git.corp.yahoo.com:Edge/trafficserver.git oats
   if [ -d oats ] ; then
     cd oats
-    git remote rename origin oath
-    git remote add oath-swoc git@partner.git.corp.yahoo.com:SolidWallOfCode/trafficserver.git
+    git remote rename origin edge
+    git remote add edge-swoc git@partner.git.corp.yahoo.com:SolidWallOfCode/trafficserver.git
     git remote add ats https://github.com/apache/trafficserver/trafficserver.git
   fi
 fi
@@ -35,7 +35,7 @@ fi
 cd
 
 if ! grep -q devtoolset .bashrc ; then
-  echo 'source /opt/rh/devtoolset-7/enable' >> .bashrc
+  echo 'source /opt/rh/devtoolset-8/enable' >> .bashrc
 fi
 
 if ! grep -q rh-python36 .bashrc ; then
