@@ -1,0 +1,321 @@
+#### EDITOR SUPPORT ####
+## This file exists ONLY to support code editors (e.g. Visual Code, CLion).
+##
+## !!!-> IT WILL NOT BUILD TRAFFIC SERVER <-!!!
+##
+## This file can be tweaked to keep editors happy. In general all projects should be defined here so
+## there is only one instance of this file, not one per directory. This has been done only to the
+## extent that someone using such an editor needed it, so much work is left to be done.
+#######################
+#
+#  Licensed to the Apache Software Foundation (ASF) under one or more contributor license
+#  agreements.  See the NOTICE file distributed with this work for additional information regarding
+#  copyright ownership.  The ASF licenses this file to you under the Apache License, Version 2.0
+#  (the "License"); you may not use this file except in compliance with the License.  You may obtain
+#  a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software distributed under the License
+#  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+#  or implied. See the License for the specific language governing permissions and limitations under
+#  the License.
+#
+#######################
+
+cmake_minimum_required(VERSION 3.12)
+Project(TrafficServer)
+set(CMAKE_CXX_STANDARD 11)
+include(GNUInstallDirs)
+include(FindOpenSSL)
+
+find_package(PkgConfig REQUIRED)
+
+add_compile_options(-D__STDC_LIMIT_MACROS=1 -D__STDC_FORMAT_MACROS=1 -DOPENSSL_NO_SSL_INTERN)
+add_compile_options(-Wno-invalid-offsetof)
+
+include_directories(lib)
+
+add_library(tsutil SHARED
+    lib/ts/Arena.cc
+    lib/ts/ink_base64.cc
+    lib/ts/ink_rwlock.cc
+    lib/ts/ArgParser.cc
+    lib/ts/ink_cap.cc
+    lib/ts/ink_sock.cc
+    lib/ts/lockfile.cc
+    lib/ts/BaseLogFile.cc
+    lib/ts/ink_code.cc
+    lib/ts/ink_sprintf.cc
+    lib/ts/MatcherUtils.cc
+    lib/ts/Bitops.cc
+    lib/ts/ink_defs.cc
+    lib/ts/ink_stack_trace.cc
+    lib/ts/MMH.cc
+    lib/ts/BufferWriterFormat.cc
+    lib/ts/InkErrno.cc
+    lib/ts/ink_string++.cc
+    lib/ts/ParseRules.cc
+    lib/ts/ink_error.cc
+    lib/ts/ink_string.cc
+    lib/ts/RawHashTable.cc
+    lib/ts/ConsistentHash.cc
+    lib/ts/ink_file.cc
+    lib/ts/ink_sys_control.cc
+    lib/ts/RbTree.cc
+    lib/ts/ContFlags.cc
+    lib/ts/ink_hash_table.cc
+    lib/ts/ink_syslog.cc
+    lib/ts/Regex.cc
+    lib/ts/TextBuffer.cc
+    lib/ts/Diags.cc
+    lib/ts/ink_hrtime.cc
+    lib/ts/ink_thread.cc
+    lib/ts/Regression.cc
+    lib/ts/TextView.cc
+    lib/ts/EventNotify.cc
+    lib/ts/ink_inet.cc
+    lib/ts/ink_time.cc
+    lib/ts/runroot.cc
+    lib/ts/Tokenizer.cc
+    lib/ts/Hash.cc
+    lib/ts/ink_memory.cc
+    lib/ts/ink_uuid.cc
+    lib/ts/signals.cc
+    lib/ts/ts_file.cc
+    lib/ts/HashFNV.cc
+    lib/ts/ink_mutex.cc
+    lib/ts/SourceLocation.cc
+    lib/ts/Vec.cc
+    lib/ts/HashMD5.cc
+    lib/ts/ink_queue.cc
+    lib/ts/IpMap.cc
+    lib/ts/Version.cc
+    lib/ts/HashSip.cc
+    lib/ts/ink_queue_utils.cc
+    lib/ts/IpMapConf.cc
+    lib/ts/X509HostnameValidator.cc
+    lib/ts/HostLookup.cc
+    lib/ts/ink_rand.cc
+    lib/ts/hugepages.cc
+    lib/ts/ink_res_init.cc
+    lib/ts/JeAllocator.cc
+    lib/ts/ink_args.cc
+    lib/ts/ink_res_mkquery.cc
+    lib/ts/Layout.cc
+    lib/ts/ink_assert.cc
+    lib/ts/ink_resource.cc
+    lib/ts/llqueue.cc
+    )
+
+add_library(records STATIC
+    lib/records/RecConfigParse.cc
+    lib/records/RecCore.cc
+    lib/records/RecDebug.cc
+    lib/records/RecFile.cc
+    lib/records/RecHttp.cc
+    lib/records/RecMessage.cc
+    lib/records/RecMutex.cc
+    lib/records/RecRawStats.cc
+    lib/records/RecUtils.cc
+    )
+target_include_directories(records PRIVATE iocore/eventsystem lib/records)
+
+add_library(mgmt_utils_p STATIC
+    mgmt/utils/MgmtMarshall.cc
+    mgmt/utils/MgmtSocket.cc
+    mgmt/utils/MgmtUtils.cc
+
+    mgmt/utils/MgmtProcessCleanup.cc
+    )
+target_include_directories(mgmt_utils_p PRIVATE mgmt mgmt/utils)
+
+add_library(mgmt_utils_lm STATIC
+    mgmt/utils/MgmtMarshall.cc
+    mgmt/utils/MgmtSocket.cc
+    mgmt/utils/MgmtUtils.cc
+
+    mgmt/utils/ExpandingArray.cc
+    mgmt/utils/MgmtLocalCleanup.cc
+    )
+target_include_directories(mgmt_utils_lm PRIVATE mgmt mgmt/utils)
+
+add_library(mgmt_c STATIC
+    mgmt/RecordsConfig.cc
+    )
+target_include_directories(mgmt_c PRIVATE lib/records)
+
+add_library(mgmt_p STATIC
+    mgmt/BaseManager.cc
+    mgmt/RecordsConfigUtils.cc
+
+    mgmt/ProcessManager.cc
+    mgmt/ProxyConfig.cc
+    )
+target_include_directories(mgmt_p PRIVATE mgmt mgmt/utils iocore/eventsystem iocore/net iocore/dns iocore/hostdb iocore/cache iocore/aio proxy proxy/hdrs proxy/http proxy/api/ts lib/records)
+
+add_library(mgmt_lm STATIC
+    mgmt/BaseManager.cc
+    mgmt/RecordsConfigUtils.cc
+
+    mgmt/Alarms.cc
+    mgmt/FileManager.cc
+    mgmt/LocalManager.cc
+    mgmt/WebMgmtUtils.cc
+    )
+target_include_directories(mgmt_lm PRIVATE mgmt/utils iocore/eventsystem)
+
+add_library(inkevent STATIC
+    iocore/eventsystem/EventSystem.cc
+    iocore/eventsystem/IOBuffer.cc
+    iocore/eventsystem/Inline.cc
+    iocore/eventsystem/Lock.cc
+    iocore/eventsystem/PQ-List.cc
+    iocore/eventsystem/Processor.cc
+    iocore/eventsystem/ProtectedQueue.cc
+    iocore/eventsystem/ProxyAllocator.cc
+    iocore/eventsystem/SocketManager.cc
+    iocore/eventsystem/Tasks.cc
+    iocore/eventsystem/Thread.cc
+    iocore/eventsystem/UnixEThread.cc
+    iocore/eventsystem/UnixEvent.cc
+    iocore/eventsystem/UnixEventProcessor.cc
+    )
+target_include_directories(inkevent PRIVATE iocore/eventsystem lib/records)
+
+add_library(iocore_utils STATIC
+    iocore/utils/Machine.cc
+    iocore/utils/OneWayMultiTunnel.cc
+    iocore/utils/OneWayTunnel.cc
+    )
+target_include_directories(iocore_utils PRIVATE iocore/eventsystem lib/records)
+
+add_library(aio STATIC
+    iocore/aio/AIO.cc
+    iocore/aio/Inline.cc
+    )
+target_include_directories(aio PRIVATE iocore/eventsystem lib/records)
+
+add_library(inknet STATIC
+    iocore/net/BIO_fastopen.cc
+    iocore/net/Connection.cc
+    iocore/net/Inline.cc
+    iocore/net/SessionAccept.cc
+    iocore/net/LuaSNIConfig.cc
+    iocore/net/Net.cc
+    iocore/net/NetVConnection.cc
+    iocore/net/Socks.cc
+    iocore/net/SNIActionPerformer.cc
+    iocore/net/SSLCertLookup.cc
+    iocore/net/SSLSessionCache.cc
+    iocore/net/SSLConfig.cc
+    iocore/net/SSLInternal.cc
+    iocore/net/SSLNetAccept.cc
+    iocore/net/SSLNetProcessor.cc
+    iocore/net/SSLNetVConnection.cc
+    iocore/net/SSLNextProtocolAccept.cc
+    iocore/net/SSLNextProtocolSet.cc
+    iocore/net/SSLSNIConfig.cc
+    iocore/net/SSLUtils.cc
+    iocore/net/SSLClientUtils.cc
+    iocore/net/OCSPStapling.cc
+    iocore/net/Socks.cc
+    iocore/net/UDPIOEvent.cc
+    iocore/net/UnixConnection.cc
+    iocore/net/UnixNet.cc
+    iocore/net/UnixNetAccept.cc
+    iocore/net/UnixNetPages.cc
+    iocore/net/UnixNetProcessor.cc
+    iocore/net/UnixNetVConnection.cc
+    iocore/net/UnixUDPConnection.cc
+    iocore/net/UnixUDPNet.cc
+    iocore/net/SSLDynlock.cc
+    )
+target_include_directories(inknet PRIVATE iocore/eventsystem iocore/aio iocore/net iocore/dns iocore/cache iocore/cluster iocore/utils lib/records mgmt mgmt/utils proxy proxy/hdrs proxy/http proxy/logging proxy/api/ts)
+
+add_library(inkcluster STATIC
+    iocore/cluster/ClusterAPI.cc
+    iocore/cluster/ClusterCache.cc
+    iocore/cluster/ClusterConfig.cc
+    iocore/cluster/ClusterHandler.cc
+    iocore/cluster/ClusterHandlerBase.cc
+    iocore/cluster/ClusterHash.cc
+    iocore/cluster/ClusterLib.cc
+    iocore/cluster/ClusterLoadMonitor.cc
+    iocore/cluster/ClusterMachine.cc
+    iocore/cluster/ClusterProcessor.cc
+    iocore/cluster/ClusterRPC.cc
+    iocore/cluster/ClusterVConnection.cc
+    iocore/cluster/Inline.cc
+    )
+target_include_directories(inkcluster PRIVATE iocore/eventsystem iocore/aio iocore/net iocore/dns iocore/cache iocore/cluster iocore/utils lib/records proxy proxy/hdrs proxy/http proxy/api/ts mgmt mgmt/utils)
+
+add_library(hostdb STATIC
+    iocore/hostdb/HostDB.cc
+    iocore/hostdb/RefCountCache.cc
+    iocore/hostdb/Inline.cc
+    )
+target_include_directories(hostdb PRIVATE iocore/hostdb iocore/eventsystem iocore/aio iocore/net iocore/cache iocore/dns iocore/cluster iocore/utils lib/records proxy mgmt mgmt/utils proxy/hdrs proxy/http)
+
+add_library(proxy_hdrs STATIC
+    proxy/hdrs/HdrHeap.cc
+    proxy/hdrs/HdrTSOnly.cc
+    proxy/hdrs/HTTP.cc
+    proxy/hdrs/HttpCompat.cc
+    proxy/hdrs/MIME.cc
+    proxy/hdrs/URL.cc
+    proxy/hdrs/HdrUtils.cc
+    )
+target_include_directories(proxy_hdrs PRIVATE iocore/eventsystem lib/records)
+
+add_library(proxy_shared STATIC
+    proxy/shared/DiagsConfig.cc
+    )
+target_include_directories(proxy_shared PRIVATE lib/records)
+
+add_library(ugly_log_stubs STATIC
+    proxy/shared/UglyLogStubs.cc
+    )
+target_include_directories(ugly_log_stubs PRIVATE iocore/eventsystem iocore/net iocore/dns iocore/cache iocore/aio iocore/hostdb iocore/cluster iocore/utils proxy proxy/hdrs proxy/http proxy/logging proxy/api/ts lib/records mgmt mgmt/utils)
+
+add_executable(traffic_server
+    proxy/AbstractBuffer.cc
+    proxy/CacheControl.cc
+    proxy/ControlBase.cc
+    proxy/ControlMatcher.cc
+    proxy/CoreUtils.cc
+    proxy/Crash.cc
+    proxy/EventName.cc
+    proxy/FetchSM.cc
+    proxy/ICP.cc
+    proxy/ICPConfig.cc
+    proxy/ICPProcessor.cc
+    proxy/ICPStats.cc
+    proxy/ICPlog.h
+    proxy/IPAllow.cc
+    proxy/InkAPI.cc
+    proxy/InkIOCoreAPI.cc
+    proxy/Main.cc
+    proxy/Milestones.h
+    proxy/ParentConsistentHash.cc
+    proxy/ParentRoundRobin.cc
+    proxy/ParentSelection.cc
+    proxy/Plugin.cc
+    proxy/PluginVC.cc
+    proxy/ProtocolProbeSessionAccept.cc
+    proxy/ProxyClientSession.cc
+    proxy/ProxyClientTransaction.cc
+    proxy/ReverseProxy.cc
+    proxy/SocksProxy.cc
+    proxy/StatPages.cc
+    proxy/Transform.cc
+    proxy/TransformInternal.h
+    )
+target_include_directories(traffic_server PRIVATE iocore/eventsystem iocore/cache iocore/aio iocore/net iocore/dns iocore/hostdb iocore/cluster iocore/utils proxy proxy/http proxy/http2 proxy/hdrs proxy/http/remap proxy/logging proxy/shared proxy/api/ts lib/records mgmt mgmt/utils)
+target_link_libraries(traffic_server PRIVATE
+    inkevent
+    inkcache
+    inkaio
+    inkcluster
+    proxy_shared
+    )
