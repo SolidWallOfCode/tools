@@ -18,17 +18,17 @@ COMMIT
 -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 -A INPUT -p icmp -j ACCEPT
 -A INPUT -i lo -j ACCEPT
--A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT
--A INPUT -i virbr0 -p udp -m udp --dport 67:68 -j ACCEPT
+-A INPUT -i virbr0-nic -p udp -m udp --dport 53 -j ACCEPT
+-A INPUT -i virbr0-nic -p udp -m udp --dport 67:68 -j ACCEPT
 -A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
 -A INPUT -j REJECT --reject-with icmp-host-prohibited
 -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
--A FORWARD -i virbr0 ! -o virbr0 -p udp -m udp --dport 53 -j ACCEPT
--A FORWARD -d 10.0.0.0/8 -i virbr0 -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -d 172.16.0.0/12 -i virbr0 -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -d 192.168.0.0/16 -i virbr0 -j REJECT --reject-with icmp-host-prohibited
--A FORWARD ! -i virbr0 -o virbr0 -p tcp -m tcp --dport 22 -j ACCEPT
--A FORWARD -i virbr0 ! -o virbr0 -j ACCEPT
+-A FORWARD -i virbr0-nic ! -o virbr0-nic -p udp -m udp --dport 53 -j ACCEPT
+-A FORWARD -d 10.0.0.0/8 -i virbr0-nic -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -d 172.16.0.0/12 -i virbr0-nic -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -d 192.168.0.0/16 -i virbr0-nic -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD ! -i virbr0-nic -o virbr0-nic -p tcp -m tcp --dport 22 -j ACCEPT
+-A FORWARD -i virbr0-nic ! -o virbr0-nic -j ACCEPT
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
 # Completed on Tue Jun  6 21:05:23 2017
